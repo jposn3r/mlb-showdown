@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* MLB Showdown — Stadium Night theme */
+:root {
+  /* Core palette */
+  --color-bg: #0d0f14;
+  --color-bg-surface: #151820;
+  --color-bg-elevated: #1c2030;
+  --color-gold: #c9a84c;
+  --color-gold-dim: #8a7434;
+  --color-text: #f0f0f0;
+  --color-text-muted: #8a8fa0;
+  --color-navy: #1a1e2e;
+  --color-divider: #252a3a;
+
+  /* Card colors */
+  --color-card-face: #f5f0e1;
+  --color-card-text: #1a1a1a;
+  --color-card-stat: #2a2a2a;
+
+  /* Rarity colors */
+  --color-rarity-common: #8a8fa0;
+  --color-rarity-uncommon: #c0c0c0;
+  --color-rarity-rare: #c9a84c;
+  --color-rarity-foil: linear-gradient(135deg, #c9a84c, #e8d5a0, #c9a84c, #8a7434);
+
+  /* Fatigue bar */
+  --color-fatigue-green: #4caf50;
+  --color-fatigue-yellow: #ff9800;
+  --color-fatigue-red: #f44336;
+
+  /* Scoreboard */
+  --color-scoreboard-amber: #ff9500;
+  --color-scoreboard-bg: #1a1208;
+
+  /* Fonts */
+  --font-display: 'Playfair Display', 'DM Serif Display', Georgia, serif;
+  --font-ui: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-divider);
+  border-radius: 3px;
+}
