@@ -17,7 +17,7 @@ export const nymCards: PlayerCard[] = [
     mlbPlayerId: 656849,
     control: 3,
     ip: 6,
-    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "DP", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "GB", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-605280",
@@ -34,7 +34,7 @@ export const nymCards: PlayerCard[] = [
     mlbPlayerId: 605280,
     control: 2,
     ip: 5,
-    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "DP", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "GB", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-673540",
@@ -51,7 +51,7 @@ export const nymCards: PlayerCard[] = [
     mlbPlayerId: 673540,
     control: 1,
     ip: 5,
-    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "BB", 5: "BB", 6: "FB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "GB", 12: "GB", 13: "GB", 14: "GB", 15: "DP", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "BB", 5: "BB", 6: "FB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "GB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-656288",
@@ -68,7 +68,7 @@ export const nymCards: PlayerCard[] = [
     mlbPlayerId: 656288,
     control: 1,
     ip: 5,
-    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "DP", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "GB", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-656731",
@@ -85,7 +85,7 @@ export const nymCards: PlayerCard[] = [
     mlbPlayerId: 656731,
     control: 1,
     ip: 5,
-    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "GB", 12: "GB", 13: "GB", 14: "DP", 15: "SO", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "GB", 12: "GB", 13: "GB", 14: "GB", 15: "SO", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-621242",
@@ -102,7 +102,7 @@ export const nymCards: PlayerCard[] = [
     mlbPlayerId: 621242,
     control: 4,
     ip: 2,
-    pitcherChart: { 1: "1B", 2: "1B", 3: "BB", 4: "BB", 5: "FB", 6: "FB", 7: "FB", 8: "FB", 9: "GB", 10: "GB", 11: "GB", 12: "DP", 13: "SO", 14: "SO", 15: "SO", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "1B", 2: "1B", 3: "BB", 4: "BB", 5: "FB", 6: "FB", 7: "FB", 8: "FB", 9: "GB", 10: "GB", 11: "GB", 12: "GB", 13: "SO", 14: "SO", 15: "SO", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-664854",
@@ -119,7 +119,7 @@ export const nymCards: PlayerCard[] = [
     mlbPlayerId: 664854,
     control: 2,
     ip: 2,
-    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "1B", 6: "BB", 7: "BB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "DP", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "1B", 6: "BB", 7: "BB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-657585",
@@ -136,7 +136,7 @@ export const nymCards: PlayerCard[] = [
     mlbPlayerId: 657585,
     control: 1,
     ip: 9,
-    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "GB", 12: "GB", 13: "GB", 14: "GB", 15: "DP", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "GB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-620443",
@@ -155,7 +155,7 @@ export const nymCards: PlayerCard[] = [
     speed: "C",
     fielding: 3,
     arm: 4,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "DP", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "FB", 16: "BB", 17: "1B", 18: "1B", 19: "1B", 20: "2B" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "FB", 16: "BB", 17: "1B", 18: "1B", 19: "1B", 20: "2B" },
   },
   {
     id: "player-624413",
@@ -174,7 +174,7 @@ export const nymCards: PlayerCard[] = [
     speed: "C",
     fielding: 2,
     arm: 2,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "DP", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-643446",
@@ -193,7 +193,7 @@ export const nymCards: PlayerCard[] = [
     speed: "C",
     fielding: 3,
     arm: 2,
-    batterChart: { 1: "SO", 2: "SO", 3: "DP", 4: "GB", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "FB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "GB", 4: "GB", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "FB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-668901",
@@ -212,7 +212,7 @@ export const nymCards: PlayerCard[] = [
     speed: "C",
     fielding: 3,
     arm: 3,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "DP", 7: "GB", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-596019",
@@ -231,7 +231,7 @@ export const nymCards: PlayerCard[] = [
     speed: "A",
     fielding: 3,
     arm: 3,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "DP", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-607043",
@@ -250,7 +250,7 @@ export const nymCards: PlayerCard[] = [
     speed: "B",
     fielding: 2,
     arm: 2,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "DP", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-656775",
@@ -269,7 +269,7 @@ export const nymCards: PlayerCard[] = [
     speed: "A",
     fielding: 3,
     arm: 3,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "DP", 7: "GB", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "BB", 16: "BB", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "BB", 16: "BB", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-665742",
@@ -288,7 +288,7 @@ export const nymCards: PlayerCard[] = [
     speed: "A",
     fielding: 3,
     arm: 4,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "DP", 6: "GB", 7: "GB", 8: "GB", 9: "FB", 10: "FB", 11: "FB", 12: "BB", 13: "BB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "FB", 10: "FB", 11: "FB", 12: "BB", 13: "BB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-683146",
@@ -307,7 +307,7 @@ export const nymCards: PlayerCard[] = [
     speed: "B",
     fielding: 3,
     arm: 3,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "DP", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-621438",
@@ -326,7 +326,7 @@ export const nymCards: PlayerCard[] = [
     speed: "B",
     fielding: 3,
     arm: 3,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "DP", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "FB", 16: "BB", 17: "1B", 18: "1B", 19: "1B", 20: "2B" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "FB", 16: "BB", 17: "1B", 18: "1B", 19: "1B", 20: "2B" },
   },
   {
     id: "player-516782",
@@ -345,7 +345,7 @@ export const nymCards: PlayerCard[] = [
     speed: "B",
     fielding: 2,
     arm: 2,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "DP", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "1B", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "1B", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-682626",
@@ -364,6 +364,6 @@ export const nymCards: PlayerCard[] = [
     speed: "C",
     fielding: 3,
     arm: 4,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "DP", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   }
 ];

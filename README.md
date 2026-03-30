@@ -8,8 +8,8 @@ A browser-based implementation of the MLB Showdown collectible card and dice gam
 - **Real MLB Data** — 600+ player cards generated from 2025 MLB season stats via the MLB Stats API
 - **30 MLB Teams** — Complete rosters with real player headshots, stats, and outcome charts
 - **Franchise Mode** — 30-team league with schedule, standings, roster management, stat tracking, and day-by-day season progression (10/30/50 game seasons)
-- **Interactive Gameplay** — Roll dice, see advantage calculations, watch runners advance on the diamond
-- **Dark Theme UI** — Stadium Night aesthetic with gold accents
+- **Interactive Gameplay** — Roll under the active card, bouncing die animation, watch runners advance on the diamond
+- **Dark Theme UI** — Stadium Night aesthetic with gold accents, scattered card pile home screen with mouse-reveal spotlight
 
 ## Tech Stack
 

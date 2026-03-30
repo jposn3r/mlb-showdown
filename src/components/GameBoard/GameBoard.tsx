@@ -1,20 +1,98 @@
-import { useMemo } from 'react';
+import { useMemo, useState, useCallback, useRef, useEffect } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import { getCurrentBatter, getCurrentPitcher, getBattingTeam, getFieldingTeam } from '../../game/stateMachine';
 import { PlayerCard } from '../Card/PlayerCard';
-import { DiceRoller } from '../Dice/DiceRoller';
 import { BaseballDiamond } from '../Diamond/BaseballDiamond';
 import { Scoreboard } from '../Scoreboard/Scoreboard';
 import { GameLog } from './GameLog';
 import { OnDeck } from './OnDeck';
 import { Bullpen } from './Bullpen';
 import { getResultDescription } from '../../game/engine';
-import type { PlayerCard as PlayerCardType } from '../../types';
+import type { PlayerCard as PlayerCardType, AtBatResult } from '../../types';
+import '../../styles/dice.css';
 
-/**
- * One side of the game board — shows either the pitcher+bullpen or batter+on-deck
- * depending on the team's current role.
- */
+// ── Bouncing Die ────────────────────────────────────────────────────
+
+function BouncingDie({
+  isAnimating,
+  value,
+  resultType,
+}: {
+  isAnimating: boolean;
+  value: number | null;
+  resultType: AtBatResult | null;
+}) {
+  const [offsetX] = useState(() => Math.random() * 60 - 30); // random horizontal drift
+
+  if (!isAnimating && value === null) return null;
+
+  const settled = !isAnimating && value !== null;
+  const resultColor = !resultType ? 'var(--color-gold)'
+    : resultType === 'HR' ? '#ffcc00'
+    : ['1B', '2B', '3B'].includes(resultType) ? '#70ff70'
+    : resultType === 'BB' ? '#70a0ff'
+    : '#ff7070';
+
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+      <div
+        className={`absolute ${isAnimating ? 'die-bouncing' : 'die-settled'}`}
+        style={{
+          bottom: isAnimating ? undefined : '20px',
+          left: '50%',
+          transform: settled ? `translateX(calc(-50% + ${offsetX}px))` : undefined,
+          ['--drift' as string]: `${offsetX}px`,
+        }}
+      >
+        <div
+          className="w-[52px] h-[52px] rounded-xl flex items-center justify-center font-bold text-xl"
+          style={{
+            fontFamily: 'var(--font-display)',
+            background: settled
+              ? `linear-gradient(145deg, ${resultColor}22, ${resultColor}11)`
+              : 'linear-gradient(145deg, #3a3a4a, #2a2a3a)',
+            border: `2px solid ${settled ? resultColor : 'var(--color-gold)'}`,
+            color: settled ? resultColor : 'var(--color-text)',
+            boxShadow: settled ? `0 0 16px ${resultColor}60` : 'none',
+          }}
+        >
+          {isAnimating ? '?' : value}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Roll Button ─────────────────────────────────────────────────────
+
+function RollButton({
+  label,
+  onClick,
+  pulsing,
+}: {
+  label: string;
+  onClick: () => void;
+  pulsing?: boolean;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`w-[224px] py-2.5 rounded-lg font-bold text-sm cursor-pointer
+        transition-all hover:scale-[1.03] active:scale-[0.97]
+        ${pulsing ? 'animate-pulse' : ''}`}
+      style={{
+        background: 'var(--color-gold)',
+        color: 'var(--color-bg)',
+        fontFamily: 'var(--font-display)',
+      }}
+    >
+      {label}
+    </button>
+  );
+}
+
+// ── Team Column ─────────────────────────────────────────────────────
+
 function TeamColumn({
   team,
   role,
@@ -24,6 +102,9 @@ function TeamColumn({
   currentPitcherId,
   onSelectPitcher,
   canChangePitcher,
+  isActiveRoller,
+  onRoll,
+  rollLabel,
   pitchResult,
   swingResult,
 }: {
@@ -35,6 +116,9 @@ function TeamColumn({
   currentPitcherId: string;
   onSelectPitcher: (p: PlayerCardType) => void;
   canChangePitcher: boolean;
+  isActiveRoller: boolean;
+  onRoll: (() => void) | null;
+  rollLabel: string | null;
   pitchResult: { advantage: 'pitcher' | 'batter' } | null;
   swingResult: { dieRoll: number } | null;
 }) {
@@ -59,12 +143,13 @@ function TeamColumn({
         {isPitching ? `Pitching — ${team.name}` : `At Bat — ${team.name} (#${team.currentBatterIndex + 1})`}
       </span>
 
-      {/* Card — vertically centered in remaining space */}
+      {/* Card */}
       <div className="flex-1 flex items-center">
         <PlayerCard
           card={card}
           size="sm"
           showAdvantage={pitchResult?.advantage ?? null}
+          isActiveRoller={isActiveRoller}
           activeRoll={
             isPitching
               ? (pitchResult?.advantage === 'pitcher' ? swingResult?.dieRoll : undefined)
@@ -72,9 +157,18 @@ function TeamColumn({
           }
         />
       </div>
+
+      {/* Roll button — appears under the active roller's card */}
+      <div className="h-[52px] flex items-center justify-center mt-2">
+        {isActiveRoller && onRoll && rollLabel && (
+          <RollButton label={rollLabel} onClick={onRoll} pulsing />
+        )}
+      </div>
     </div>
   );
 }
+
+// ── Main Game Board ─────────────────────────────────────────────────
 
 export function GameBoard() {
   const {
@@ -83,6 +177,36 @@ export function GameBoard() {
     rollPitch, rollSwing, confirmResult, continueToNextHalfInning,
     doChangePitcher,
   } = useGameStore();
+
+  // Bouncing die state
+  const [dieAnim, setDieAnim] = useState<{
+    isAnimating: boolean;
+    value: number | null;
+    resultType: AtBatResult | null;
+  }>({ isAnimating: false, value: null, resultType: null });
+
+  const handleRollPitch = useCallback(() => {
+    setDieAnim({ isAnimating: true, value: null, resultType: null });
+    setTimeout(() => {
+      const result = rollPitch();
+      setDieAnim({ isAnimating: false, value: result, resultType: null });
+      // Clear after display
+      setTimeout(() => setDieAnim({ isAnimating: false, value: null, resultType: null }), 1500);
+    }, 800);
+  }, [rollPitch]);
+
+  const handleRollSwing = useCallback(() => {
+    setDieAnim({ isAnimating: true, value: null, resultType: null });
+    setTimeout(() => {
+      const result = rollSwing();
+      // We'll get the lastResult from the store after it updates
+      setTimeout(() => {
+        const { lastResult: lr } = useGameStore.getState();
+        setDieAnim({ isAnimating: false, value: result, resultType: lr });
+        setTimeout(() => setDieAnim({ isAnimating: false, value: null, resultType: null }), 1500);
+      }, 100);
+    }, 800);
+  }, [rollSwing]);
 
   if (!gameState) return null;
 
@@ -96,11 +220,26 @@ export function GameBoard() {
   const swingChartOwner = pitchResult?.advantage === 'pitcher' ? 'pitcher' : 'batter';
   const canChangePitcher = uiPhase === 'awaiting_pitch' || uiPhase === 'half_inning_break';
 
-  // Away team role: batting in top, pitching in bottom
+  // Determine which side is rolling
+  // Pitch: fielding team (pitcher) rolls. Swing: batting team (batter) rolls.
   const awayRole = gameState.halfInning === 'top' ? 'batting' : 'pitching';
   const homeRole = gameState.halfInning === 'top' ? 'pitching' : 'batting';
 
-  // The card shown for each side
+  const awayIsRolling = (canRollPitch && awayRole === 'pitching') || (canRollSwing && awayRole === 'batting');
+  const homeIsRolling = (canRollPitch && homeRole === 'pitching') || (canRollSwing && homeRole === 'batting');
+
+  const getRollHandler = (side: 'away' | 'home') => {
+    if (side === 'away' && awayIsRolling) return canRollPitch ? handleRollPitch : handleRollSwing;
+    if (side === 'home' && homeIsRolling) return canRollPitch ? handleRollPitch : handleRollSwing;
+    return null;
+  };
+
+  const getRollLabel = (side: 'away' | 'home') => {
+    if (side === 'away' && awayIsRolling) return canRollPitch ? 'Roll the Pitch' : 'Roll the Swing';
+    if (side === 'home' && homeIsRolling) return canRollPitch ? 'Roll the Pitch' : 'Roll the Swing';
+    return null;
+  };
+
   const awayCard = awayRole === 'batting' ? batter : pitcher;
   const homeCard = homeRole === 'batting' ? batter : pitcher;
 
@@ -127,14 +266,14 @@ export function GameBoard() {
   }, [fieldingTeam.pitchingStaff, pitcher.id]);
 
   return (
-    <div className="flex flex-col h-full max-w-7xl mx-auto px-4 py-2">
+    <div className="relative flex flex-col h-full max-w-7xl mx-auto px-4 py-2">
       {/* Scoreboard */}
       <div className="shrink-0 mb-2">
         <Scoreboard gameState={gameState} />
       </div>
 
       {/* === MAIN GAME AREA === */}
-      <div className="flex-1 flex flex-col md:flex-row gap-4 justify-center min-h-0">
+      <div className="flex-1 flex flex-col md:flex-row gap-4 justify-start items-start min-h-0">
 
         {/* LEFT = Away Team */}
         <TeamColumn
@@ -146,137 +285,144 @@ export function GameBoard() {
           currentPitcherId={pitcher.id}
           onSelectPitcher={doChangePitcher}
           canChangePitcher={canChangePitcher}
+          isActiveRoller={awayIsRolling}
+          onRoll={getRollHandler('away')}
+          rollLabel={getRollLabel('away')}
           pitchResult={pitchResult}
           swingResult={swingResult}
         />
 
-        {/* CENTER: Diamond + Dice + Status */}
-        <div className="flex-1 flex flex-col items-center justify-center gap-3 min-w-[280px]">
+        {/* CENTER: Diamond + Status */}
+        <div className="flex-1 flex flex-col items-center gap-3 min-w-[280px]">
           {/* Diamond */}
           <div className="w-[300px]">
             <BaseballDiamond bases={gameState.bases} runners={runnersMap} />
           </div>
 
-          {/* Pitch phase instruction */}
-          {canRollPitch && (
-            <div
-              className="text-center px-5 py-3 rounded-lg max-w-sm"
-              style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-divider)' }}
-            >
-              <div className="text-xs uppercase tracking-wider mb-1 font-bold" style={{ color: 'var(--color-gold)' }}>
-                Step 1 — The Pitch
-              </div>
-              <div className="text-sm" style={{ color: 'var(--color-text)' }}>
-                <b style={{ color: 'var(--color-gold)' }}>{fieldingTeam.name}</b> rolls.
-                Result + Control ({pitcher.control}) vs On-Base ({batter.onBase})
-              </div>
-            </div>
-          )}
+          {/* === Fixed-height status area — no layout shifts === */}
+          <div className="min-h-[140px] w-full max-w-md flex flex-col items-center justify-center">
 
-          {/* Pitch result */}
-          {pitchResult && (
-            <div
-              className="text-center px-5 py-3 rounded-lg max-w-md"
-              style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-divider)' }}
-            >
-              <div className="text-sm font-mono mb-1" style={{ color: 'var(--color-text-muted)' }}>
-                Pitch: {pitchResult.dieRoll} + {pitchResult.control} CTRL
-                {pitchResult.fatiguePenalty < 0 && ` (${pitchResult.fatiguePenalty} fatigue)`}
-                {' = '}<b style={{ color: 'var(--color-gold)' }}>{pitchResult.pitchTotal}</b>
-                {pitchResult.pitchTotal >= pitchResult.batterOnBase ? ' ≥ ' : ' < '}
-                OB <b>{pitchResult.batterOnBase}</b>
+            {/* Pitch phase instruction */}
+            {canRollPitch && (
+              <div
+                className="text-center px-5 py-3 rounded-lg w-full"
+                style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-divider)' }}
+              >
+                <div className="text-xs uppercase tracking-wider mb-1 font-bold" style={{ color: 'var(--color-gold)' }}>
+                  Step 1 — The Pitch
+                </div>
+                <div className="text-sm" style={{ color: 'var(--color-text)' }}>
+                  <b style={{ color: 'var(--color-gold)' }}>{fieldingTeam.name}</b> rolls.
+                  Result + Control ({pitcher.control}) vs On-Base ({batter.onBase})
+                </div>
               </div>
-              <div className="text-lg font-bold"
-                style={{ color: pitchResult.advantage === 'pitcher' ? '#ff7070' : '#70ff70' }}>
-                {pitchResult.advantage === 'pitcher' ? '⚾ PITCHER' : '🏏 BATTER'} ADVANTAGE
+            )}
+
+            {/* Pitch rolled / waiting for swing */}
+            {uiPhase === 'pitch_rolled' && pitchResult && (
+              <div
+                className="text-center px-5 py-3 rounded-lg w-full"
+                style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-divider)' }}
+              >
+                <div className="text-sm font-mono mb-1" style={{ color: 'var(--color-text-muted)' }}>
+                  Pitch: {pitchResult.dieRoll} + {pitchResult.control} CTRL
+                  {pitchResult.fatiguePenalty < 0 && ` (${pitchResult.fatiguePenalty} fatigue)`}
+                  {' = '}<b style={{ color: 'var(--color-gold)' }}>{pitchResult.pitchTotal}</b>
+                  {pitchResult.pitchTotal >= pitchResult.batterOnBase ? ' >= ' : ' < '}
+                  OB <b>{pitchResult.batterOnBase}</b>
+                </div>
+                <div className="text-lg font-bold"
+                  style={{ color: pitchResult.advantage === 'pitcher' ? '#ff7070' : '#70ff70' }}>
+                  {pitchResult.advantage === 'pitcher' ? 'PITCHER' : 'BATTER'} ADVANTAGE
+                </div>
               </div>
-              {canRollSwing && (
-                <div className="text-sm mt-1" style={{ color: 'var(--color-text-muted)' }}>
-                  Step 2 — Roll the swing → result on <b style={{ color: 'var(--color-gold)' }}>
+            )}
+
+            {/* Awaiting swing */}
+            {canRollSwing && pitchResult && (
+              <div
+                className="text-center px-5 py-3 rounded-lg w-full"
+                style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-divider)' }}
+              >
+                <div className="text-lg font-bold mb-1"
+                  style={{ color: pitchResult.advantage === 'pitcher' ? '#ff7070' : '#70ff70' }}>
+                  {pitchResult.advantage === 'pitcher' ? 'PITCHER' : 'BATTER'} ADVANTAGE
+                </div>
+                <div className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+                  Roll the swing — result on <b style={{ color: 'var(--color-gold)' }}>
                     {swingChartOwner === 'pitcher' ? pitcher.name + "'s" : batter.name + "'s"}
                   </b> chart
                 </div>
-              )}
-            </div>
-          )}
-
-          {/* Dice */}
-          <div className="flex gap-8 items-end">
-            <div className="flex flex-col items-center">
-              <DiceRoller onRoll={rollPitch} disabled={!canRollPitch} label="The Pitch" />
-              {canRollPitch && (
-                <span className="text-xs mt-1 animate-pulse" style={{ color: 'var(--color-gold)' }}>
-                  ▲ Click to roll
-                </span>
-              )}
-            </div>
-            <div className="flex flex-col items-center">
-              <DiceRoller onRoll={rollSwing} disabled={!canRollSwing} label="The Swing" resultType={lastResult} />
-              {canRollSwing && (
-                <span className="text-xs mt-1 animate-pulse" style={{ color: 'var(--color-gold)' }}>
-                  ▲ Roll ({swingChartOwner}'s chart)
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* Result banner */}
-          {lastResult && uiPhase === 'showing_result' && (
-            <div className="text-center">
-              <div className="text-sm mb-1" style={{ color: 'var(--color-text-muted)' }}>
-                Swing {swingResult?.dieRoll} on {swingChartOwner === 'pitcher' ? pitcher.name : batter.name}'s chart
               </div>
-              <div className="text-3xl font-bold mb-1" style={{
-                fontFamily: 'var(--font-display)',
-                color: lastResult === 'HR' ? 'var(--color-gold)'
-                  : ['1B', '2B', '3B'].includes(lastResult) ? '#70a0ff'
-                  : lastResult === 'BB' ? '#70a0ff' : '#ff7070',
-              }}>
-                {getResultDescription(lastResult)}!
-              </div>
-              {lastRunsScored > 0 && (
-                <div className="text-xl" style={{ color: 'var(--color-gold)' }}>
-                  {lastRunsScored} run{lastRunsScored > 1 ? 's' : ''} scored!
+            )}
+
+            {/* Swing rolled — showing result */}
+            {uiPhase === 'swing_rolled' && pitchResult && (
+              <div
+                className="text-center px-5 py-3 rounded-lg w-full"
+                style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-divider)' }}
+              >
+                <div className="text-sm mb-1" style={{ color: 'var(--color-text-muted)' }}>
+                  Rolling on {swingChartOwner === 'pitcher' ? pitcher.name : batter.name}'s chart...
                 </div>
-              )}
-              <button onClick={confirmResult}
-                className="mt-3 px-6 py-2 rounded text-sm font-bold cursor-pointer transition-colors"
-                style={{ background: 'var(--color-gold)', color: 'var(--color-bg)' }}>
-                Next Batter
-              </button>
-            </div>
-          )}
+              </div>
+            )}
 
-          {/* Half-inning break */}
-          {uiPhase === 'half_inning_break' && (
-            <div className="text-center">
-              {lastDescription && (
-                <div className="text-sm mb-2" style={{ color: 'var(--color-text-muted)' }}>{lastDescription}</div>
-              )}
-              <div className="text-2xl font-bold mb-3"
-                style={{ fontFamily: 'var(--font-display)', color: 'var(--color-gold)' }}>
-                {gameState.halfInning === 'top' ? 'Middle' : 'End'} of {gameState.inning}
+            {/* Result banner */}
+            {lastResult && uiPhase === 'showing_result' && (
+              <div className="text-center">
+                <div className="text-3xl font-bold mb-1" style={{
+                  fontFamily: 'var(--font-display)',
+                  color: lastResult === 'HR' ? 'var(--color-gold)'
+                    : ['1B', '2B', '3B'].includes(lastResult) ? '#70a0ff'
+                    : lastResult === 'BB' ? '#70a0ff' : '#ff7070',
+                }}>
+                  {getResultDescription(lastResult)}!
+                </div>
+                {lastRunsScored > 0 && (
+                  <div className="text-xl mb-1" style={{ color: 'var(--color-gold)' }}>
+                    {lastRunsScored} run{lastRunsScored > 1 ? 's' : ''} scored!
+                  </div>
+                )}
+                <button onClick={confirmResult}
+                  className="mt-2 px-6 py-2 rounded text-sm font-bold cursor-pointer transition-all hover:scale-105"
+                  style={{ background: 'var(--color-gold)', color: 'var(--color-bg)' }}>
+                  Next Batter
+                </button>
               </div>
-              <button onClick={continueToNextHalfInning}
-                className="px-8 py-2.5 rounded font-bold cursor-pointer transition-colors"
-                style={{ background: 'var(--color-gold)', color: 'var(--color-bg)' }}>
-                Continue
-              </button>
-            </div>
-          )}
+            )}
 
-          {/* Game over */}
-          {uiPhase === 'game_over' && (
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2"
-                style={{ fontFamily: 'var(--font-display)', color: 'var(--color-gold)' }}>
-                Game Over!
+            {/* Half-inning break */}
+            {uiPhase === 'half_inning_break' && (
+              <div className="text-center">
+                {lastDescription && (
+                  <div className="text-sm mb-2" style={{ color: 'var(--color-text-muted)' }}>{lastDescription}</div>
+                )}
+                <div className="text-2xl font-bold mb-3"
+                  style={{ fontFamily: 'var(--font-display)', color: 'var(--color-gold)' }}>
+                  {gameState.halfInning === 'top' ? 'Middle' : 'End'} of {gameState.inning}
+                </div>
+                <button onClick={continueToNextHalfInning}
+                  className="px-8 py-2.5 rounded font-bold cursor-pointer transition-all hover:scale-105"
+                  style={{ background: 'var(--color-gold)', color: 'var(--color-bg)' }}>
+                  Continue
+                </button>
               </div>
-              <div className="text-2xl">
-                {gameState.away.name} {gameState.away.score} — {gameState.home.name} {gameState.home.score}
+            )}
+
+            {/* Game over */}
+            {uiPhase === 'game_over' && (
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2"
+                  style={{ fontFamily: 'var(--font-display)', color: 'var(--color-gold)' }}>
+                  Game Over!
+                </div>
+                <div className="text-2xl" style={{ color: 'var(--color-text)' }}>
+                  {gameState.away.name} {gameState.away.score} — {gameState.home.name} {gameState.home.score}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         {/* RIGHT = Home Team */}
@@ -289,6 +435,9 @@ export function GameBoard() {
           currentPitcherId={pitcher.id}
           onSelectPitcher={doChangePitcher}
           canChangePitcher={canChangePitcher}
+          isActiveRoller={homeIsRolling}
+          onRoll={getRollHandler('home')}
+          rollLabel={getRollLabel('home')}
           pitchResult={pitchResult}
           swingResult={swingResult}
         />
@@ -298,6 +447,13 @@ export function GameBoard() {
       <div className="shrink-0 mt-2">
         <GameLog entries={gameState.gameLog} />
       </div>
+
+      {/* === Bouncing die overlay === */}
+      <BouncingDie
+        isAnimating={dieAnim.isAnimating}
+        value={dieAnim.value}
+        resultType={dieAnim.resultType}
+      />
     </div>
   );
 }

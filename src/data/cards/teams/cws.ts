@@ -17,7 +17,7 @@ export const cwsCards: PlayerCard[] = [
     mlbPlayerId: 681343,
     control: 3,
     ip: 5,
-    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "GB", 12: "GB", 13: "GB", 14: "GB", 15: "DP", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "GB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-663436",
@@ -34,7 +34,7 @@ export const cwsCards: PlayerCard[] = [
     mlbPlayerId: 663436,
     control: 3,
     ip: 6,
-    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "1B", 6: "BB", 7: "BB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "FB", 13: "GB", 14: "GB", 15: "GB", 16: "GB", 17: "DP", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "1B", 6: "BB", 7: "BB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "FB", 13: "GB", 14: "GB", 15: "GB", 16: "GB", 17: "GB", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-680732",
@@ -51,7 +51,7 @@ export const cwsCards: PlayerCard[] = [
     mlbPlayerId: 680732,
     control: 1,
     ip: 6,
-    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "1B", 6: "BB", 7: "BB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "DP", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "1B", 6: "BB", 7: "BB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "GB", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-605288",
@@ -68,7 +68,7 @@ export const cwsCards: PlayerCard[] = [
     mlbPlayerId: 605288,
     control: 4,
     ip: 6,
-    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "1B", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "DP", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "1B", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "GB", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-686563",
@@ -85,7 +85,7 @@ export const cwsCards: PlayerCard[] = [
     mlbPlayerId: 686563,
     control: 3,
     ip: 6,
-    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "1B", 6: "BB", 7: "BB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "DP", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "1B", 6: "BB", 7: "BB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "GB", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-673929",
@@ -102,7 +102,7 @@ export const cwsCards: PlayerCard[] = [
     mlbPlayerId: 673929,
     control: 1,
     ip: 9,
-    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "GB", 12: "GB", 13: "GB", 14: "DP", 15: "SO", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "HR", 2: "2B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "GB", 12: "GB", 13: "GB", 14: "GB", 15: "SO", 16: "SO", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-691799",
@@ -136,7 +136,7 @@ export const cwsCards: PlayerCard[] = [
     mlbPlayerId: 678024,
     control: 1,
     ip: 9,
-    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "DP", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
+    pitcherChart: { 1: "2B", 2: "1B", 3: "1B", 4: "1B", 5: "BB", 6: "BB", 7: "FB", 8: "FB", 9: "FB", 10: "FB", 11: "FB", 12: "GB", 13: "GB", 14: "GB", 15: "GB", 16: "GB", 17: "SO", 18: "SO", 19: "SO", 20: "SO" },
   },
   {
     id: "player-700337",
@@ -155,7 +155,7 @@ export const cwsCards: PlayerCard[] = [
     speed: "C",
     fielding: 3,
     arm: 4,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "DP", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "1B", 20: "2B" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "1B", 20: "2B" },
   },
   {
     id: "player-683734",
@@ -174,7 +174,7 @@ export const cwsCards: PlayerCard[] = [
     speed: "C",
     fielding: 2,
     arm: 2,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "DP", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-672820",
@@ -193,7 +193,7 @@ export const cwsCards: PlayerCard[] = [
     speed: "C",
     fielding: 3,
     arm: 2,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "DP", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "1B", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "1B", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-678246",
@@ -212,7 +212,7 @@ export const cwsCards: PlayerCard[] = [
     speed: "C",
     fielding: 3,
     arm: 3,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "DP", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-805367",
@@ -231,7 +231,7 @@ export const cwsCards: PlayerCard[] = [
     speed: "B",
     fielding: 3,
     arm: 3,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "DP", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "FB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "1B", 20: "2B" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "GB", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "FB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "1B", 20: "2B" },
   },
   {
     id: "player-643217",
@@ -250,7 +250,7 @@ export const cwsCards: PlayerCard[] = [
     speed: "C",
     fielding: 2,
     arm: 2,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "DP", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "FB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "GB", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "FB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-673357",
@@ -269,7 +269,7 @@ export const cwsCards: PlayerCard[] = [
     speed: "A",
     fielding: 3,
     arm: 3,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "DP", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-643565",
@@ -288,7 +288,7 @@ export const cwsCards: PlayerCard[] = [
     speed: "C",
     fielding: 3,
     arm: 4,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "DP", 6: "GB", 7: "GB", 8: "GB", 9: "FB", 10: "FB", 11: "FB", 12: "FB", 13: "BB", 14: "BB", 15: "1B", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "GB", 6: "GB", 7: "GB", 8: "GB", 9: "FB", 10: "FB", 11: "FB", 12: "FB", 13: "BB", 14: "BB", 15: "1B", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-681460",
@@ -307,7 +307,7 @@ export const cwsCards: PlayerCard[] = [
     speed: "C",
     fielding: 2,
     arm: 2,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "DP", 7: "GB", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "FB", 15: "BB", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-572191",
@@ -326,7 +326,7 @@ export const cwsCards: PlayerCard[] = [
     speed: "B",
     fielding: 3,
     arm: 4,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "SO", 7: "SO", 8: "DP", 9: "GB", 10: "GB", 11: "GB", 12: "FB", 13: "FB", 14: "FB", 15: "FB", 16: "BB", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "SO", 7: "SO", 8: "GB", 9: "GB", 10: "GB", 11: "GB", 12: "FB", 13: "FB", 14: "FB", 15: "FB", 16: "BB", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-691019",
@@ -345,7 +345,7 @@ export const cwsCards: PlayerCard[] = [
     speed: "C",
     fielding: 3,
     arm: 4,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "DP", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "BB", 14: "BB", 15: "1B", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "GB", 7: "GB", 8: "GB", 9: "GB", 10: "FB", 11: "FB", 12: "FB", 13: "BB", 14: "BB", 15: "1B", 16: "1B", 17: "1B", 18: "1B", 19: "2B", 20: "HR" },
   },
   {
     id: "player-695657",
@@ -364,6 +364,6 @@ export const cwsCards: PlayerCard[] = [
     speed: "C",
     fielding: 3,
     arm: 3,
-    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "SO", 7: "DP", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "2B", 19: "HR", 20: "HR" },
+    batterChart: { 1: "SO", 2: "SO", 3: "SO", 4: "SO", 5: "SO", 6: "SO", 7: "GB", 8: "GB", 9: "GB", 10: "GB", 11: "FB", 12: "FB", 13: "FB", 14: "BB", 15: "BB", 16: "1B", 17: "1B", 18: "2B", 19: "HR", 20: "HR" },
   }
 ];

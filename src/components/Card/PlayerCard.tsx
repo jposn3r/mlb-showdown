@@ -12,6 +12,7 @@ interface Props {
   card: CardType;
   activeRoll?: number;
   showAdvantage?: 'pitcher' | 'batter' | null;
+  isActiveRoller?: boolean;
   size?: 'sm' | 'md' | 'lg';
 }
 
@@ -21,16 +22,20 @@ const SIZE_CLASSES = {
   lg: 'w-[400px] h-[600px]',
 };
 
-export function PlayerCard({ card, activeRoll, showAdvantage, size = 'md' }: Props) {
+export function PlayerCard({ card, activeRoll, showAdvantage, isActiveRoller, size = 'md' }: Props) {
   const isPitcher = card.position === 'SP' || card.position === 'RP';
   const chart = isPitcher ? card.pitcherChart : card.batterChart;
   const rarityClass = card.rarity === 'foil' ? 'card-foil' : card.rarity === 'rare' ? 'card-rare' : '';
 
-  const isAdvantaged = showAdvantage === (isPitcher ? 'pitcher' : 'batter');
-  const hasAdvantage = showAdvantage !== null && showAdvantage !== undefined;
-
   return (
-    <div className={`${SIZE_CLASSES[size]} relative rounded-[8px] overflow-hidden ${rarityClass}`}>
+    <div
+      className={`${SIZE_CLASSES[size]} relative rounded-[8px] overflow-hidden ${rarityClass}`}
+      style={isActiveRoller ? {
+        boxShadow: '0 0 24px rgba(201,168,76,0.6), 0 0 48px rgba(201,168,76,0.3)',
+        outline: '3px solid var(--color-gold)',
+        outlineOffset: '-1px',
+      } : undefined}
+    >
       {/* Outer border — team color accent */}
       <div className="absolute inset-0 rounded-[8px]" style={{ background: card.teamColor }} />
 
@@ -66,13 +71,6 @@ export function PlayerCard({ card, activeRoll, showAdvantage, size = 'md' }: Pro
             {card.points} pt
           </div>
 
-          {/* Advantage glow overlay */}
-          {hasAdvantage && isAdvantaged && (
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{ border: '2px solid #4caf50', borderRadius: '4px' }}
-            />
-          )}
         </div>
 
         {/* === NAME BAR === */}

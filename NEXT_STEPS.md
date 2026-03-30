@@ -55,6 +55,23 @@ What's been done and what's left to build.
 - [x] Zustand screen store (no router)
 - [x] Zero type errors, production build works
 
+### UI Polish — Game Board
+- [x] Fixed layout shifting: center column uses fixed-height status area instead of conditional mount/unmount
+- [x] Roll button placed under active roller's card (pitcher for pitch, batter for swing)
+- [x] Only one roll button visible at a time — no disabled dice cluttering the UI
+- [x] Full-card gold glow on active roller's card (replaces old image-area green border)
+- [x] Bouncing die animation across bottom of game board after each roll
+- [x] Sim Rest button to simulate remaining innings mid-game
+
+### UI Polish — Home Screen
+- [x] Scattered card pile background (~100 mini cards at random positions/rotations)
+- [x] Top 10 star players (Judge, Ohtani, etc.) rendered larger with guaranteed quadrant distribution
+- [x] Depth darkening: lower z-index cards are dimmer, stars pop on top
+- [x] Blurred base layer with mouse-tracking spotlight that reveals sharp cards underneath
+
+### Card Data Fix
+- [x] Removed DP from all 600+ card charts (replaced with GB) — DP is now purely auto-triggered by the engine when GB occurs with runner on 1st and <2 outs
+
 ---
 
 ## Not Yet Started
