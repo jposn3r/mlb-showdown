@@ -100,6 +100,69 @@ export function simulateGame(
 }
 
 /**
+ * Continue simulating from an in-progress game state to completion.
+ * Used for the "Sim Rest of Game" feature.
+ */
+export function simulateFromState(initialState: GameState): SimulationResult {
+  const rng = createRandomRng();
+  let state = { ...initialState };
+
+  // If we're mid at-bat (not at pre_at_bat or half_inning_end), force to pre_at_bat
+  if (state.phase !== 'pre_at_bat' && state.phase !== 'half_inning_end' && state.phase !== 'game_over') {
+    state = { ...state, phase: 'pre_at_bat' };
+  }
+
+  let maxAtBats = 500;
+
+  while (!isGameOver(state) && maxAtBats-- > 0) {
+    if (state.phase === 'half_inning_end') {
+      state = startNextHalfInning(state);
+      continue;
+    }
+
+    if (state.phase !== 'pre_at_bat') {
+      break;
+    }
+
+    const batter = getCurrentBatter(state);
+    const pitcher = getCurrentPitcher(state);
+    const inningsPitched = getInningsPitchedInGame(state, pitcher.id);
+
+    const pitchRoll = rng.roll();
+    const swingRoll = rng.roll();
+
+    const outcome = resolveAtBat(
+      pitcher,
+      batter,
+      pitchRoll,
+      swingRoll,
+      inningsPitched,
+      state.bases,
+      state.outs,
+    );
+
+    const description = `${batter.name}: ${getResultDescription(outcome.swing.result)}`;
+
+    state = recordAtBatResult(
+      state,
+      outcome.swing.result,
+      outcome.baserunning.runsScored,
+      outcome.baserunning.bases,
+      outcome.baserunning.outs,
+      description,
+    );
+  }
+
+  return {
+    finalState: state,
+    winner: getWinner(state),
+    awayScore: state.away.score,
+    homeScore: state.home.score,
+    innings: state.inning,
+  };
+}
+
+/**
  * Format a simulation result as a box score string.
  */
 export function formatBoxScore(state: GameState): string {

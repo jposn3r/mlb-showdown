@@ -9,6 +9,7 @@ import { rollD20 } from '../game/dice';
 import {
   resolvePitch, resolveSwing, type PitchResult, type SwingResult, type Advantage,
 } from '../game/engine';
+import { simulateFromState } from '../game/simulation';
 import { advanceRunners, attemptSteal, type Bases } from '../game/baserunning';
 import {
   createGameState, startGame, recordAtBatResult, startNextHalfInning,
@@ -49,6 +50,7 @@ interface GameStore {
   confirmResult: () => void;
   continueToNextHalfInning: () => void;
   doChangePitcher: (newPitcher: PlayerCard) => void;
+  simulateRest: () => void;
   resetGame: () => void;
 }
 
@@ -189,6 +191,22 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const { gameState } = get();
     if (!gameState) return;
     set({ gameState: changePitcher(gameState, newPitcher) });
+  },
+
+  simulateRest: () => {
+    const { gameState } = get();
+    if (!gameState) return;
+
+    const result = simulateFromState(gameState);
+    set({
+      gameState: result.finalState,
+      uiPhase: 'game_over',
+      pitchResult: null,
+      swingResult: null,
+      lastResult: null,
+      lastRunsScored: 0,
+      lastDescription: '',
+    });
   },
 
   resetGame: () => {

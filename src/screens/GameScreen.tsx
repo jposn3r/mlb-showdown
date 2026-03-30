@@ -5,7 +5,7 @@ import { useFranchiseStore } from '../store/franchiseStore';
 import { GameBoard } from '../components/GameBoard/GameBoard';
 
 export function GameScreen() {
-  const { gameState, uiPhase, resetGame } = useGameStore();
+  const { gameState, uiPhase, resetGame, simulateRest } = useGameStore();
   const navigate = useScreenStore((s) => s.navigate);
   const activeFranchiseGameId = useFranchiseStore((s) => s.activeFranchiseGameId);
 
@@ -46,7 +46,20 @@ export function GameScreen() {
         >
           MLB Showdown
         </span>
-        <div className="w-12" />
+        {uiPhase !== 'game_over' && uiPhase !== 'not_started' && (
+          <button
+            onClick={simulateRest}
+            className="text-xs px-3 py-1 rounded cursor-pointer transition-all hover:scale-105"
+            style={{
+              background: 'var(--color-bg-elevated)',
+              color: 'var(--color-text-muted)',
+              border: '1px solid var(--color-divider)',
+            }}
+          >
+            Sim Rest
+          </button>
+        )}
+        {(uiPhase === 'game_over' || uiPhase === 'not_started') && <div className="w-16" />}
       </div>
 
       {/* Game board — fills all remaining vertical space */}
