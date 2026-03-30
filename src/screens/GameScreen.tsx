@@ -1,19 +1,22 @@
 import { useEffect } from 'react';
 import { useGameStore } from '../store/gameStore';
 import { useScreenStore } from '../store/screenStore';
+import { useFranchiseStore } from '../store/franchiseStore';
 import { GameBoard } from '../components/GameBoard/GameBoard';
 
 export function GameScreen() {
   const { gameState, uiPhase, resetGame } = useGameStore();
   const navigate = useScreenStore((s) => s.navigate);
+  const activeFranchiseGameId = useFranchiseStore((s) => s.activeFranchiseGameId);
 
   // Auto-navigate to result screen on game over
   useEffect(() => {
     if (uiPhase === 'game_over') {
-      const timer = setTimeout(() => navigate('result'), 3000);
+      const target = activeFranchiseGameId ? 'franchiseResult' : 'result';
+      const timer = setTimeout(() => navigate(target), 3000);
       return () => clearTimeout(timer);
     }
-  }, [uiPhase, navigate]);
+  }, [uiPhase, navigate, activeFranchiseGameId]);
 
   if (!gameState) {
     return (

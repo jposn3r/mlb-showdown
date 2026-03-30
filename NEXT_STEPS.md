@@ -88,16 +88,23 @@ What's been done and what's left to build.
 - [ ] Custom card generator with stat assignment
 
 ### Phase 8 — Franchise Foundation
-- [ ] `franchiseStore.ts` with localStorage persistence
-- [ ] `franchiseEngine.ts` — schedule generation, standings, CPU game simulation
-- [ ] `FranchiseHubScreen.tsx` — schedule, standings, roster, leaders, awards, bracket, history
-- [ ] `scheduleGenerator.ts` — random opponent assignment for 10/30/50 game seasons
-- [ ] Advance Day: simulate all CPU games for that day
-- [ ] 6 divisions (AL/NL East/Central/West) matching real MLB
+- [x] `franchiseStore.ts` with Zustand + localStorage persistence (persist middleware)
+- [x] `franchiseEngine.ts` — schedule generation (seeded RNG, division-weighted opponents), standings computation, roster initialization for all 30 teams, pitcher rotation
+- [x] `statsTracker.ts` — per-player stat extraction from game logs, season stat merging
+- [x] `FranchiseSetupScreen.tsx` — 5-step wizard (Choose Path → Team Selection → Settings → Confirm → Launch animation)
+- [x] `FranchiseHubScreen.tsx` — tabbed hub with Schedule, Standings, Roster, Leaders views
+- [x] `FranchiseResultScreen.tsx` — post-game result with franchise context (W/L, updated record)
+- [x] Franchise components: ScheduleView, StandingsTable, RosterManager, StatLeaders, FranchiseNav
+- [x] Schedule generation for 10/30/50 game seasons (all 30 teams play each day)
+- [x] Advance Day: simulates all 14 CPU games headlessly via real engine
+- [x] 6 divisions (AL/NL East/Central/West) matching real MLB
+- [x] GameScreen integration: detects franchise context, routes to FranchiseResultScreen
+- [x] HomeScreen: shows active franchise record or routes to setup wizard
+- [x] Franchise types: FranchiseSave, FranchiseRoster, ScheduleDay, StandingsRow, PlayerSeasonStats
 
-### Phase 9 — Franchise Roster Management
-- [ ] Pitcher rotation picker with mandatory rest enforcement (no consecutive starts)
-- [ ] Lineup order setter
+### Phase 9 — Franchise Roster Management (partial)
+- [x] Pitcher rotation picker with mandatory rest enforcement (no consecutive starts)
+- [x] Lineup batting order reordering (move up/down)
 - [ ] Trade panel: mid-season window (after 40% of games), CPU accept/reject, max 3/season
 - [ ] Injury system (optional toggle): pitcher IP overuse, position player consecutive games
 - [ ] Aging/retirement (optional toggle): seasonsRemaining counter, free agent replacement

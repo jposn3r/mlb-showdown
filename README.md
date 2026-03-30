@@ -7,6 +7,7 @@ A browser-based implementation of the MLB Showdown collectible card and dice gam
 - **Full Expert Ruleset** — d20 pitch/swing mechanic, pitcher fatigue, stolen bases, auto double plays
 - **Real MLB Data** — 600+ player cards generated from 2025 MLB season stats via the MLB Stats API
 - **30 MLB Teams** — Complete rosters with real player headshots, stats, and outcome charts
+- **Franchise Mode** — 30-team league with schedule, standings, roster management, stat tracking, and day-by-day season progression (10/30/50 game seasons)
 - **Interactive Gameplay** — Roll dice, see advantage calculations, watch runners advance on the diamond
 - **Dark Theme UI** — Stadium Night aesthetic with gold accents
 
@@ -15,7 +16,7 @@ A browser-based implementation of the MLB Showdown collectible card and dice gam
 - React 18 + TypeScript + Vite
 - Tailwind CSS v3
 - Zustand (state management)
-- Framer Motion (animations, planned)
+- Framer Motion (animations)
 - Howler.js (audio, planned)
 
 ## Getting Started
@@ -50,7 +51,7 @@ python scripts/generate-cards.py --season 2025
 - `src/game/` — Pure TypeScript game engine (no React dependencies)
 - `src/store/` — Zustand state stores
 - `src/components/` — React UI components (Card, Dice, Diamond, Scoreboard, GameBoard)
-- `src/screens/` — Top-level screens (Home, QuickPlay, Game, Result)
+- `src/screens/` — Top-level screens (Home, QuickPlay, Game, Result, FranchiseSetup, FranchiseHub, FranchiseResult)
 - `src/data/` — Generated card data for all 30 MLB teams
 - `scripts/` — Data pipeline and test scripts
 

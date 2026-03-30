@@ -1,4 +1,6 @@
 import { useScreenStore, type Screen } from '../store/screenStore';
+import { useFranchiseStore } from '../store/franchiseStore';
+import { getTeamRecord } from '../game/franchiseEngine';
 
 const GAME_MODES: { id: Screen; title: string; desc: string }[] = [
   { id: 'quickPlaySelect', title: 'Quick Play', desc: 'Pick a preset team and play' },
@@ -9,6 +11,8 @@ const GAME_MODES: { id: Screen; title: string; desc: string }[] = [
 
 export function HomeScreen() {
   const navigate = useScreenStore((s) => s.navigate);
+  const franchise = useFranchiseStore((s) => s.franchise);
+  const franchiseRecord = franchise ? getTeamRecord(franchise.schedule, franchise.userTeamAbbr) : null;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 py-8">
@@ -57,7 +61,7 @@ export function HomeScreen() {
 
       {/* Franchise button — full width below grid */}
       <button
-        onClick={() => navigate('franchiseHub')}
+        onClick={() => navigate(franchise ? 'franchiseHub' : 'franchiseSetup')}
         className="w-full max-w-md rounded-lg p-5 text-left transition-all duration-200
           hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
         style={{
@@ -72,7 +76,9 @@ export function HomeScreen() {
           Franchise Mode
         </h3>
         <p className="text-xs mt-1" style={{ color: 'var(--color-text-muted)' }}>
-          30-team league, full seasons, playoffs, and legacy
+          {franchise && franchiseRecord
+            ? `${franchise.name} — ${franchiseRecord.wins}-${franchiseRecord.losses} (Day ${franchise.currentDay})`
+            : '30-team league, full seasons, playoffs, and legacy'}
         </p>
       </button>
 
