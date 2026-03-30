@@ -57,6 +57,19 @@ describe('statsTracker', () => {
       expect(b1.ab).toBe(4); // all non-BB count as AB
     });
 
+    it('counts triples correctly', () => {
+      const log = makeGameLog([
+        { batterId: 'b1', batterName: 'B1', result: '3B' },
+        { batterId: 'b1', batterName: 'B1', result: '3B' },
+        { batterId: 'b1', batterName: 'B1', result: '1B' },
+      ]);
+      const stats = extractStatsFromGame(makeGameStateWithLog(log), 'AWAY', 'HOME');
+      const b1 = stats.find(s => s.playerId === 'b1')!;
+      expect(b1.triples).toBe(2);
+      expect(b1.hits).toBe(3);
+      expect(b1.singles).toBe(1);
+    });
+
     it('walks count as PA but not AB', () => {
       const log = makeGameLog([
         { batterId: 'b1', batterName: 'B1', result: 'BB' },

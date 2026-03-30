@@ -69,13 +69,14 @@ describe('engine', () => {
     });
 
     it('HR with bases loaded scores 4 runs', () => {
-      // Force batter advantage with low roll, then roll 1 on batter chart (HR)
+      // Control 0, IP 0, pitched 5 innings → effective control = 0 + (-5) = -5
+      // Roll 1 + (-5) = -4, which is < onBase 16 → batter advantage guaranteed
       const weakPitcher = makePitcher({ control: 0, ip: 0 });
       const strongBatter = makeBatter({ onBase: 16, batterChart: { 1: 'HR' } });
       const outcome = resolveAtBat(weakPitcher, strongBatter, 1, 1, 5, ['r1', 'r2', 'r3'], 0);
-      if (outcome.pitch.advantage === 'batter') {
-        expect(outcome.baserunning.runsScored.length).toBe(4);
-      }
+      expect(outcome.pitch.advantage).toBe('batter');
+      expect(outcome.swing.result).toBe('HR');
+      expect(outcome.baserunning.runsScored).toHaveLength(4);
     });
   });
 

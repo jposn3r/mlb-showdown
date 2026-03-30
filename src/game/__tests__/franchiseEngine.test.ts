@@ -2,7 +2,10 @@ import { describe, it, expect } from 'vitest';
 import {
   generateSchedule,
   buildDefaultRoster,
+  buildAllRosters,
   getNextStarter,
+  getCardById,
+  resolveRoster,
   computeStandings,
   getTeamRecord,
   getUserGame,
@@ -107,6 +110,73 @@ describe('franchiseEngine', () => {
 
     it('returns empty string for empty rotation', () => {
       expect(getNextStarter({ ...roster, startingPitchers: [] })).toBe('');
+    });
+  });
+
+  describe('buildAllRosters', () => {
+    it('builds rosters for all 30 teams', () => {
+      const rosters = buildAllRosters();
+      const abbrs = Object.keys(rosters);
+      expect(abbrs).toHaveLength(30);
+    });
+
+    it('each roster has a lineup and starting pitchers', () => {
+      const rosters = buildAllRosters();
+      for (const [abbr, roster] of Object.entries(rosters)) {
+        expect(roster.lineup.length).toBeGreaterThan(0);
+        expect(roster.startingPitchers.length).toBeGreaterThan(0);
+        expect(roster.teamAbbr).toBe(abbr);
+      }
+    });
+  });
+
+  describe('getCardById', () => {
+    it('returns a card for a valid ID', () => {
+      const roster = buildDefaultRoster('NYY');
+      const cardId = roster.lineup[0];
+      const card = getCardById(cardId);
+      expect(card).toBeDefined();
+      expect(card!.id).toBe(cardId);
+      expect(card!.team).toBe('NYY');
+    });
+
+    it('returns undefined for invalid ID', () => {
+      expect(getCardById('nonexistent-id')).toBeUndefined();
+    });
+  });
+
+  describe('resolveRoster', () => {
+    it('resolves a roster into lineup and pitching arrays', () => {
+      const roster = buildDefaultRoster('NYY');
+      const starterId = roster.startingPitchers[0];
+      const resolved = resolveRoster(roster, starterId);
+      expect(resolved).not.toBeNull();
+      expect(resolved!.lineup.length).toBeGreaterThan(0);
+      expect(resolved!.pitching.length).toBeGreaterThan(0);
+    });
+
+    it('places the starting pitcher first in pitching array', () => {
+      const roster = buildDefaultRoster('NYY');
+      const starterId = roster.startingPitchers[2]; // pick a non-first SP
+      const resolved = resolveRoster(roster, starterId);
+      expect(resolved).not.toBeNull();
+      expect(resolved!.pitching[0].id).toBe(starterId);
+    });
+
+    it('returns null for invalid pitcher ID', () => {
+      const roster = buildDefaultRoster('NYY');
+      const resolved = resolveRoster(roster, 'nonexistent-pitcher');
+      expect(resolved).toBeNull();
+    });
+
+    it('includes relief pitchers in pitching array', () => {
+      const roster = buildDefaultRoster('NYY');
+      const starterId = roster.startingPitchers[0];
+      const resolved = resolveRoster(roster, starterId);
+      expect(resolved).not.toBeNull();
+      // Pitching array should have starter + relievers + other SPs
+      const expectedSize = 1 + roster.reliefPitchers.length + (roster.startingPitchers.length - 1);
+      expect(resolved!.pitching).toHaveLength(expectedSize);
     });
   });
 

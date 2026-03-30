@@ -125,6 +125,86 @@ describe('stateMachine', () => {
     });
   });
 
+  describe('extra innings', () => {
+    function playHalfInning(state: ReturnType<typeof makeStartedGame>, runs: number = 0) {
+      // Record 3 outs to end the half-inning, optionally scoring runs on the first at-bat
+      if (runs > 0) {
+        const scorers = Array.from({ length: runs }, (_, i) => `runner-${i}`);
+        state = recordAtBatResult(state, 'HR', scorers, [null, null, null], 0, 'HR');
+        state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+        state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+        state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      } else {
+        state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+        state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+        state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      }
+      return state;
+    }
+
+    it('sets isExtraInnings when tied after 9', () => {
+      let state = makeStartedGame();
+      // Play through 9 full innings, all scoreless
+      for (let i = 0; i < 9; i++) {
+        // Top half
+        state = playHalfInning(state);
+        state = startNextHalfInning(state);
+        // Bottom half
+        state = playHalfInning(state);
+        if (state.phase === 'half_inning_end') {
+          state = startNextHalfInning(state);
+        }
+      }
+      expect(state.isExtraInnings).toBe(true);
+      expect(state.inning).toBe(10);
+    });
+
+    it('game ends in extras when away scores and home does not', () => {
+      let state = makeStartedGame();
+      // Fast-forward to top of 10th, tied 0-0
+      state = {
+        ...state,
+        inning: 10,
+        halfInning: 'top',
+        isExtraInnings: true,
+        away: { ...state.away, score: 0, inningRuns: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        home: { ...state.home, score: 0, inningRuns: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+      };
+      // Away scores 1 in the top of the 10th
+      state = recordAtBatResult(state, 'HR', ['batter'], [null, null, null], 0, 'HR');
+      state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      // Should be half_inning_end, switch to bottom
+      expect(state.halfInning).toBe('bottom');
+      state = startNextHalfInning(state);
+      // Home fails to score in the bottom of the 10th
+      state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      expect(state.phase).toBe('game_over');
+      expect(getWinner(state)).toBe('away');
+    });
+
+    it('walk-off works in extra innings', () => {
+      let state = makeStartedGame();
+      // Set up bottom of 10th, tied 1-1
+      state = {
+        ...state,
+        inning: 10,
+        halfInning: 'bottom',
+        isExtraInnings: true,
+        away: { ...state.away, score: 1, inningRuns: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1] },
+        home: { ...state.home, score: 1, inningRuns: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+      };
+      // Home team walks off
+      state = recordAtBatResult(state, 'HR', ['batter'], [null, null, null], 0, 'Walk-off HR');
+      expect(state.phase).toBe('game_over');
+      expect(state.home.score).toBe(2);
+      expect(getWinner(state)).toBe('home');
+    });
+  });
+
   describe('startNextHalfInning', () => {
     it('transitions from half_inning_end to pre_at_bat', () => {
       let state = makeStartedGame();

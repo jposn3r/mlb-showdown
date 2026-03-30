@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { simulateGame, formatBoxScore } from '../simulation';
-import { makeLineup, makePitchingStaff } from './fixtures';
+import { simulateGame, simulateFromState, formatBoxScore } from '../simulation';
+import { makeLineup, makePitchingStaff, makeStartedGame } from './fixtures';
+import { recordAtBatResult, startNextHalfInning } from '../stateMachine';
 
 describe('simulation', () => {
   const awayLineup = makeLineup('away');
@@ -51,6 +52,48 @@ describe('simulation', () => {
     it('game log has entries', () => {
       const result = simulateGame('A', awayLineup, awayPitching, 'H', homeLineup, homePitching, 42);
       expect(result.finalState.gameLog.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('simulateFromState', () => {
+    it('completes a game from a mid-game state', () => {
+      let state = makeStartedGame();
+      // Play a couple at-bats to get into a mid-game state
+      state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      state = recordAtBatResult(state, '1B', [], ['away-batter-1', null, null], 0, 'Single');
+      const result = simulateFromState(state);
+      expect(result.finalState.phase).toBe('game_over');
+      expect(result.winner).not.toBeNull();
+      expect(result.innings).toBeGreaterThanOrEqual(9);
+    });
+
+    it('handles state already at game_over', () => {
+      const completed = simulateGame('A', awayLineup, awayPitching, 'H', homeLineup, homePitching, 42);
+      const result = simulateFromState(completed.finalState);
+      expect(result.finalState.phase).toBe('game_over');
+      expect(result.awayScore).toBe(completed.awayScore);
+      expect(result.homeScore).toBe(completed.homeScore);
+    });
+
+    it('handles state at half_inning_end phase', () => {
+      let state = makeStartedGame();
+      // Force 3 outs to reach half_inning_end
+      state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      state = recordAtBatResult(state, 'SO', [], [null, null, null], 1, 'K');
+      expect(state.phase).toBe('half_inning_end');
+      const result = simulateFromState(state);
+      expect(result.finalState.phase).toBe('game_over');
+      expect(result.winner).not.toBeNull();
+    });
+
+    it('coerces mid-at-bat phase to pre_at_bat', () => {
+      let state = makeStartedGame();
+      // Force an unusual phase that could occur if user quits mid-at-bat
+      state = { ...state, phase: 'pitch' };
+      const result = simulateFromState(state);
+      expect(result.finalState.phase).toBe('game_over');
+      expect(result.winner).not.toBeNull();
     });
   });
 
