@@ -12,7 +12,7 @@ export function FranchiseHubScreen() {
   const navigate = useScreenStore((s) => s.navigate);
   const {
     franchise, activeTab, isAdvancing,
-    setActiveTab, startFranchiseGame, advanceDay, setLineup, setStartingPitcher, deleteFranchise,
+    setActiveTab, startFranchiseGame, advanceDay, setLineup, setStartingPitcher,
   } = useFranchiseStore();
 
   if (!franchise) {

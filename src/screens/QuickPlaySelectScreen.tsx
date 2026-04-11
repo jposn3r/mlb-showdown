@@ -3,7 +3,7 @@ import { useScreenStore } from '../store/screenStore';
 import { useGameStore } from '../store/gameStore';
 import { allCards } from '../data/cards/allCards';
 import { teams } from '../data/teams';
-import type { PlayerCard } from '../types';
+
 
 function getTeamRoster(abbr: string) {
   const teamCards = allCards.filter((c) => c.team === abbr);

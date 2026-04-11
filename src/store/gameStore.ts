@@ -7,15 +7,15 @@ import { create } from 'zustand';
 import type { PlayerCard, AtBatResult } from '../types';
 import { rollD20 } from '../game/dice';
 import {
-  resolvePitch, resolveSwing, type PitchResult, type SwingResult, type Advantage,
+  resolvePitch, resolveSwing, type PitchResult, type SwingResult,
 } from '../game/engine';
 import { simulateFromState } from '../game/simulation';
-import { advanceRunners, attemptSteal, type Bases } from '../game/baserunning';
+import { advanceRunners } from '../game/baserunning';
 import {
   createGameState, startGame, recordAtBatResult, startNextHalfInning,
-  changePitcher, getCurrentBatter, getCurrentPitcher, getBattingTeam,
-  getFieldingTeam, getInningsPitchedInGame, isGameOver, getWinner,
-  type GameState, type GamePhase,
+  changePitcher, getCurrentBatter, getCurrentPitcher,
+  getInningsPitchedInGame, isGameOver,
+  type GameState,
 } from '../game/stateMachine';
 
 export type UIPhase =
@@ -114,7 +114,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       if (!currentState) return;
 
       const currentBatter = getCurrentBatter(currentState);
-      const currentPitcher = getCurrentPitcher(currentState);
+      const _currentPitcher = getCurrentPitcher(currentState);
       const baseResult = advanceRunners(
         currentState.bases,
         currentBatter.id,
@@ -122,7 +122,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
         currentState.outs,
       );
 
-      const isHit = ['1B', '2B', '3B', 'HR'].includes(swing.result);
+      const _isHit = ['1B', '2B', '3B', 'HR'].includes(swing.result);
       const isAutoDP = baseResult.outs === 2; // GB with runner on 1st = auto double play
       const resultDesc = swing.result === 'HR' ? `${currentBatter.name} hits a HOME RUN!`
         : swing.result === '3B' ? `${currentBatter.name} triples!`

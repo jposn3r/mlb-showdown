@@ -5,7 +5,6 @@
  * Pure TypeScript, no React dependencies.
  */
 
-import type { AtBatResult } from '../types';
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
 export type SeasonLength = 10 | 30 | 50;
