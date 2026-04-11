@@ -169,7 +169,6 @@ export function recordAtBatResult(
   description: string,
 ): GameState {
   const battingTeam = getBattingTeam(state);
-  const fieldingTeam = getFieldingTeam(state);
   const batter = getCurrentBatter(state);
   const pitcher = getCurrentPitcher(state);
 

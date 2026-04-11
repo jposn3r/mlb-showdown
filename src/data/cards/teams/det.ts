@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — Detroit Tigers
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const detCards: PlayerCard[] = [
   {

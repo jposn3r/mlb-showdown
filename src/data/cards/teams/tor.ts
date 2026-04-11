@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — Toronto Blue Jays
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const torCards: PlayerCard[] = [
   {

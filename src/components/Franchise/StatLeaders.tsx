@@ -110,7 +110,7 @@ function LeaderBoard({
                 </span>
                 <span style={{ color: 'var(--color-text-muted)' }}>{row.teamAbbr}</span>
                 <span className="font-bold font-mono w-8 text-right" style={{ color: 'var(--color-text)' }}>
-                  {formatStat ? formatStat(row) : (row as Record<string, number>)[statKey]}
+                  {formatStat ? formatStat(row) : (row as unknown as Record<string, number>)[statKey]}
                 </span>
               </div>
             );

@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — San Diego Padres
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const sdCards: PlayerCard[] = [
   {

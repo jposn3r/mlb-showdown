@@ -22,7 +22,7 @@ const SIZE_CLASSES = {
   lg: 'w-[400px] h-[600px]',
 };
 
-export function PlayerCard({ card, activeRoll, showAdvantage, isActiveRoller, size = 'md' }: Props) {
+export function PlayerCard({ card, activeRoll, isActiveRoller, size = 'md' }: Props) {
   const isPitcher = card.position === 'SP' || card.position === 'RP';
   const chart = isPitcher ? card.pitcherChart : card.batterChart;
   const rarityClass = card.rarity === 'foil' ? 'card-foil' : card.rarity === 'rare' ? 'card-rare' : '';

@@ -6,9 +6,8 @@
  */
 
 import type { PlayerCard } from '../types';
-import { createRandomRng, createSeededRng, type DiceRng } from './dice';
+import { createRandomRng, createSeededRng } from './dice';
 import { resolveAtBat, getResultDescription } from './engine';
-import { attemptSteal, type Bases } from './baserunning';
 import {
   createGameState,
   startGame,
@@ -16,7 +15,6 @@ import {
   startNextHalfInning,
   getCurrentBatter,
   getCurrentPitcher,
-  getBattingTeam,
   getInningsPitchedInGame,
   isGameOver,
   getWinner,

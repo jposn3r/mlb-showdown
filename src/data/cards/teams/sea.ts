@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — Seattle Mariners
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const seaCards: PlayerCard[] = [
   {

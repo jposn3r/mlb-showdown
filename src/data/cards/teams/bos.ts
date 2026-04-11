@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — Boston Red Sox
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const bosCards: PlayerCard[] = [
   {

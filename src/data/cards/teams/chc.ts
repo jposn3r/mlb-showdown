@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — Chicago Cubs
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const chcCards: PlayerCard[] = [
   {

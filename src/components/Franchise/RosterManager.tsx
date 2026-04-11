@@ -26,14 +26,6 @@ export function RosterManager({
     onSetLineup(newLineup);
   };
 
-  const swapWithBench = (lineupIdx: number, benchIdx: number) => {
-    const newLineup = [...roster.lineup];
-    const newBench = [...roster.bench];
-    [newLineup[lineupIdx], newBench[benchIdx]] = [newBench[benchIdx], newLineup[lineupIdx]];
-    onSetLineup(newLineup);
-    // Note: bench update would need a separate action, but for now lineup swap covers it
-  };
-
   return (
     <div className="p-4 max-w-2xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

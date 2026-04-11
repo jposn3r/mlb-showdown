@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — Kansas City Royals
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const kcCards: PlayerCard[] = [
   {

@@ -1,7 +1,6 @@
-import { useMemo } from 'react';
 import { getTeamByAbbr } from '../../data/teams';
 import { getUserGame } from '../../game/franchiseEngine';
-import type { FranchiseSave, ScheduleDay, ScheduledGame } from '../../types/franchise';
+import type { FranchiseSave, ScheduledGame } from '../../types/franchise';
 
 export function ScheduleView({
   franchise,
@@ -205,9 +204,6 @@ function UserGameCard({
 }
 
 function SmallGameRow({ game }: { game: ScheduledGame }) {
-  const awayMeta = getTeamByAbbr(game.awayTeamAbbr);
-  const homeMeta = getTeamByAbbr(game.homeTeamAbbr);
-
   return (
     <div
       className="flex items-center justify-between px-3 py-1.5 rounded text-xs"

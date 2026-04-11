@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — Colorado Rockies
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const colCards: PlayerCard[] = [
   {

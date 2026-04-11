@@ -114,7 +114,6 @@ export const useGameStore = create<GameStore>((set, get) => ({
       if (!currentState) return;
 
       const currentBatter = getCurrentBatter(currentState);
-      const _currentPitcher = getCurrentPitcher(currentState);
       const baseResult = advanceRunners(
         currentState.bases,
         currentBatter.id,
@@ -122,7 +121,6 @@ export const useGameStore = create<GameStore>((set, get) => ({
         currentState.outs,
       );
 
-      const _isHit = ['1B', '2B', '3B', 'HR'].includes(swing.result);
       const isAutoDP = baseResult.outs === 2; // GB with runner on 1st = auto double play
       const resultDesc = swing.result === 'HR' ? `${currentBatter.name} hits a HOME RUN!`
         : swing.result === '3B' ? `${currentBatter.name} triples!`

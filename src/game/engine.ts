@@ -6,7 +6,6 @@
  */
 
 import type { PlayerCard, AtBatResult, OutcomeChart } from '../types';
-import { getEffectiveControl } from './fatigue';
 import { advanceRunners, type Bases, type BaserunningResult } from './baserunning';
 
 export type Advantage = 'pitcher' | 'batter';

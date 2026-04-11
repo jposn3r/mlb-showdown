@@ -1,7 +1,7 @@
 import { useScreenStore } from '../store/screenStore';
 import { useFranchiseStore } from '../store/franchiseStore';
 import { getTeamByAbbr } from '../data/teams';
-import { getTeamRecord, getUserGame, isUserGameComplete } from '../game/franchiseEngine';
+import { getTeamRecord, isUserGameComplete } from '../game/franchiseEngine';
 import { FranchiseNav } from '../components/Franchise/FranchiseNav';
 import { ScheduleView } from '../components/Franchise/ScheduleView';
 import { StandingsTable } from '../components/Franchise/StandingsTable';

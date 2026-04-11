@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — Tampa Bay Rays
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const tbCards: PlayerCard[] = [
   {

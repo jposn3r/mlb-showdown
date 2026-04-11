@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — Oakland Athletics
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const oakCards: PlayerCard[] = [
   {

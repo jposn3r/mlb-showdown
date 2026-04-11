@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback, useRef, useEffect } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import { getCurrentBatter, getCurrentPitcher, getBattingTeam, getFieldingTeam } from '../../game/stateMachine';
 import { PlayerCard } from '../Card/PlayerCard';

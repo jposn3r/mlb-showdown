@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — New York Mets
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const nymCards: PlayerCard[] = [
   {

@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — Milwaukee Brewers
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const milCards: PlayerCard[] = [
   {

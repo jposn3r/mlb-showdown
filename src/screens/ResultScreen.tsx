@@ -12,8 +12,6 @@ export function ResultScreen() {
   }
 
   const winner = getWinner(gameState);
-  const _winnerTeam = winner === 'away' ? gameState.away : gameState.home;
-  const _loserTeam = winner === 'away' ? gameState.home : gameState.away;
   const maxInnings = Math.max(gameState.away.inningRuns.length, gameState.home.inningRuns.length);
 
   return (

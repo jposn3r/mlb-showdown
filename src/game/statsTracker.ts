@@ -5,7 +5,7 @@
  * Pure TypeScript, no React dependencies.
  */
 
-import type { GameState, GameLogEntry } from './stateMachine';
+import type { GameState } from './stateMachine';
 import type { PlayerSeasonStats } from '../types/franchise';
 import { createEmptySeasonStats } from '../types/franchise';
 
@@ -120,11 +120,11 @@ export function mergeGameStats(
   seasonStats: Record<string, PlayerSeasonStats>,
   gameStats: PlayerGameStats[],
   winnerAbbr: string,
-  loserAbbr: string,
+  _loserAbbr: string,
   awayStartingPitcherId: string,
   homeStartingPitcherId: string,
   awayTeamAbbr: string,
-  homeTeamAbbr: string,
+  _homeTeamAbbr: string,
 ): Record<string, PlayerSeasonStats> {
   const updated = { ...seasonStats };
 

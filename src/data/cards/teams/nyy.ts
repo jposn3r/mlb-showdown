@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — New York Yankees
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const nyyCards: PlayerCard[] = [
   {

@@ -1,5 +1,5 @@
 // Auto-generated from MLB Stats API — Philadelphia Phillies
-import type { PlayerCard } from '../../types';
+import type { PlayerCard } from '../../../types';
 
 export const phiCards: PlayerCard[] = [
   {
